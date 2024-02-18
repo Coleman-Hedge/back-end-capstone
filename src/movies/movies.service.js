@@ -4,7 +4,9 @@ async function list(is_showing) {
   return db("movies")
     .select("movies.*")
     .modify((queryBuilder) => {
+      console.log("Is showing is equal to ", is_showing);
       if (is_showing) {
+        console.log("only returning movies that are currently showing");
         queryBuilder
           .join(
             "movies_theaters",
@@ -19,6 +21,9 @@ async function list(is_showing) {
 
 async function read(movie_id) {
   // TODO: Add your code here
+  return db("movies")
+    .select("movies.*")
+    .where({"movies.movie_id": movie_id}).first();
   
 }
 

@@ -4,17 +4,26 @@ const tableName = "reviews";
 
 async function destroy(reviewId) {
   // TODO: Write your code here
-  
+  return db(tableName).where( { review_id: reviewId }).del();
 }
 
 async function list(movie_id) {
   // TODO: Write your code here
-  
+  let reviews = await db(tableName)
+    .select(`*`)
+    .where({ movie_id: movie_id });
+  for(let review of reviews) {
+    review = await setCritic(review);
+  }
+  return reviews;
 }
 
 async function read(reviewId) {
   // TODO: Write your code here
-  
+  let review = await db(tableName)
+    .select(`*`)
+    .where({ review_id: reviewId }).first();
+  return review;
 }
 
 async function readCritic(critic_id) {
@@ -27,6 +36,7 @@ async function setCritic(review) {
 }
 
 async function update(review) {
+  console.log("updateing review");
   return db(tableName)
     .where({ review_id: review.review_id })
     .update(review, "*")
@@ -39,4 +49,5 @@ module.exports = {
   list,
   read,
   update,
+  setCritic
 };
