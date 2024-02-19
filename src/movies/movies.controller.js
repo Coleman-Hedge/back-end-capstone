@@ -24,7 +24,6 @@ async function movieExists(request, response, next) {
 
 async function read(request, response) {
   // TODO: Add your code here
-  console.log("returning this movie: ", response.locals.movie);
   const movie = response.locals.movie;
   response.json({ data: movie });
 }

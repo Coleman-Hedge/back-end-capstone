@@ -27,7 +27,8 @@ async function list(request, response) {
 }
 
 async function read(request, response) {
-  const review = response.locals.review;
+  let review = response.locals.review;
+  review = service.setCritic(reivew);
   response.json({ data: review });
 }
 
@@ -41,7 +42,6 @@ function hasMovieIdInPath(request, response, next) {
 }
 
 async function update(request, response) {
-  console.log("updateing review");
   const updatedReview = {
     ...response.locals.review,
     ...request.body.data,

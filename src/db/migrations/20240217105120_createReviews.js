@@ -14,7 +14,6 @@ exports.up = function(knex) {
     table.foreign("movie_id")
         .references("movie_id")
         .inTable("movies");
-    table.timestamps(true, true);
   });
 };
 
